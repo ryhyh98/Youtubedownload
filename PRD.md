@@ -1,4 +1,3 @@
-
 # Product Requirements Document (PRD): YouTube Downloader
 
 ## 1. Introduction
@@ -9,7 +8,7 @@ This document outlines the product requirements for a YouTube Downloader applica
 
 *   To provide a simple and intuitive way for users to download YouTube videos and music.
 *   To offer users choices in download quality for both video and audio.
-*   To create a standalone application that is easy to distribute and run on Windows.
+*   To create a standalone application that is easy to distribute and run on Windows without external dependencies.
 
 ## 3. Features
 
@@ -35,9 +34,16 @@ This document outlines the product requirements for a YouTube Downloader applica
 *   **Sample Rate:** 44100 Hz
 *   **Channels:** Stereo
 
+### 3.4. User Interface
+
+*   Display download progress with a progress bar.
+*   Show detailed conversion logs in a text area.
+
 ## 4. Technical Requirements
 
-*   The application should be built as a standalone executable file (`.exe`) for Windows.
+*   The application will be built as a standalone executable file (`.exe`) for Windows.
+*   All required external command-line tools (`yt-dlp.exe`, `ffmpeg.exe`, `ffprobe.exe`) will be packaged within a `vendor` directory.
+*   The application must be able to run without requiring users to install Python, yt-dlp, or FFmpeg separately.
 
 ## 5. Out of Scope
 

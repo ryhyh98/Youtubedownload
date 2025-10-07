@@ -1,11 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
     ['youtube_downloader.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('vendor/*', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -14,6 +13,7 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
 exe = EXE(

@@ -1,39 +1,54 @@
 # YouTube Downloader
 
-A simple GUI application to download YouTube videos and audio.
+A simple GUI application to download YouTube videos and audio, designed to be portable and easy to use.
 
 ## Features
 
--   Download YouTube videos in different resolutions (1080p, 720p, 480p).
--   Download audio only and save it as an MP3 file.
--   User-friendly graphical interface.
--   Displays download progress.
--   Saves files to a `downloads` folder.
+- Download YouTube videos in different resolutions (1080p, 720p, 480p).
+- Download audio only and save it as an MP3 file.
+- User-friendly graphical interface.
+- Displays real-time download progress and detailed logs.
+- Fully portable: no installation of Python, yt-dlp, or FFmpeg required.
+- Saves files to a `downloads` folder.
 
-## Requirements
+## Installation and Usage
 
--   Python 3
--   [yt-dlp](https://github.com/yt-dlp/yt-dlp)
--   [FFmpeg](https://ffmpeg.org/download.html) (must be installed and in the system's PATH)
+This application is designed to be run as a standalone executable without any installation.
 
-You can install the required Python packages using pip:
+1.  Go to the `dist` directory.
+2.  Ensure the following files are all in the same folder:
+    - `YouTube_Downloader.exe`
+    - `yt-dlp.exe`
+    - `ffmpeg.exe`
+    - `ffprobe.exe`
+3.  Run `YouTube_Downloader.exe`.
+4.  Paste the YouTube URL into the input field.
+5.  Select the desired video resolution.
+6.  Click "Download Video" or "Download Audio (MP3)".
+7.  The downloaded file will be saved in the `downloads` folder inside the `dist` directory.
+
+## Dependencies
+
+All required executables (`yt-dlp`, `ffmpeg`) are included in the `vendor` directory and are intended to be distributed alongside the main application executable.
+
+## Building from Source
+
+If you want to build the application from the source code, you will need:
+
+- Python 3
+- PyInstaller
 
 ```bash
-pip install -r requirements.txt
+pip install pyinstaller
 ```
 
-## Usage
+To build the executable, run the following command:
 
-1.  Run the `youtube_downloader.py` script:
+```bash
+python -m PyInstaller YouTube_Downloader.spec
+```
 
-    ```bash
-    python youtube_downloader.py
-    ```
-
-2.  Paste the YouTube URL into the input field.
-3.  Select the desired video resolution.
-4.  Click "Download Video" or "Download Audio (MP3)".
-5.  The downloaded file will be saved in the `downloads` folder.
+**Important:** Due to an unresolved issue with PyInstaller, the `datas` directive in the `.spec` file may not work correctly. After the build is complete, you must **manually copy** the contents of the `vendor` folder into the `dist` folder so they are next to the `YouTube_Downloader.exe`.
 
 ## License
 

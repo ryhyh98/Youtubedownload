@@ -1,6 +1,13 @@
-# Build artifacts
-build/
+# PyInstaller
+/build/
+/dist/
+*.spec
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Downloads
-downloads/
+# IDE / Editor
+.vscode/
+.idea/

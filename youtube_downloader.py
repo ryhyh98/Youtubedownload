@@ -108,9 +108,9 @@ def clear_log():
     log_text.delete(1.0, tk.END)
     log_text.config(state="disabled")
 
-def run_command(command):
+def run_command(command, cwd=None):
     try:
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW)
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW, cwd=cwd)
 
         for line in iter(process.stdout.readline, ''):
             line = line.strip()
@@ -148,12 +148,14 @@ def download_video():
     root.update_idletasks()
 
     yt_dlp_path = os.path.join(application_path, "yt-dlp.exe")
+    vendor_dir = os.path.dirname(yt_dlp_path)
+    yt_dlp_executable = os.path.basename(yt_dlp_path)
     download_path = get_download_path()
     resolution = resolution_var.get()
 
     command = [
-        yt_dlp_path,
-        '--ffmpeg-location', application_path,
+        yt_dlp_executable,
+        '--ffmpeg-location', vendor_dir,
         '--progress',
         '--verbose',
         '--encoding', 'utf-8',
@@ -162,7 +164,7 @@ def download_video():
         url
     ]
 
-    return_code = run_command(command)
+    return_code = run_command(command, cwd=vendor_dir)
 
     if return_code == 0:
         status_label.config(text="Status: Download Complete!")
@@ -185,11 +187,13 @@ def download_audio():
     root.update_idletasks()
 
     yt_dlp_path = os.path.join(application_path, "yt-dlp.exe")
+    vendor_dir = os.path.dirname(yt_dlp_path)
+    yt_dlp_executable = os.path.basename(yt_dlp_path)
     download_path = get_download_path()
 
     command = [
-        yt_dlp_path,
-        '--ffmpeg-location', application_path,
+        yt_dlp_executable,
+        '--ffmpeg-location', vendor_dir,
         '--progress',
         '--encoding', 'utf-8',
         '--extract-audio',
@@ -199,7 +203,7 @@ def download_audio():
         url
     ]
 
-    return_code = run_command(command)
+    return_code = run_command(command, cwd=vendor_dir)
 
     if return_code == 0:
         status_label.config(text="Status: Download Complete!")

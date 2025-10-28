@@ -16,20 +16,15 @@ A simple GUI application to download YouTube videos and audio, designed to be po
 This application is designed to be run as a standalone executable without any installation.
 
 1.  Go to the `dist` directory.
-2.  Ensure the following files are all in the same folder:
-    - `YouTube_Downloader.exe`
-    - `yt-dlp.exe`
-    - `ffmpeg.exe`
-    - `ffprobe.exe`
-3.  Run `YouTube_Downloader.exe`.
-4.  Paste the YouTube URL into the input field.
-5.  Select the desired video resolution.
-6.  Click "Download Video" or "Download Audio (MP3)".
-7.  The downloaded file will be saved in the `downloads` folder inside the `dist` directory.
+2.  Run `YouTube_Downloader.exe`.
+3.  Paste the YouTube URL into the input field.
+4.  Select the desired video resolution.
+5.  Click "Download Video" or "Download Audio (MP3)".
+6.  The downloaded file will be saved in the `downloads` folder.
 
 ## Dependencies
 
-All required executables (`yt-dlp`, `ffmpeg`) are included in the `vendor` directory and are intended to be distributed alongside the main application executable.
+All required executables (`yt-dlp`, `ffmpeg`) are included in the `vendor` directory and are automatically packaged with the application during the build process.
 
 ## Building from Source
 
@@ -42,13 +37,13 @@ If you want to build the application from the source code, you will need:
 pip install pyinstaller
 ```
 
-To build the executable, run the following command:
+To build the executable, run the following command from the project root directory:
 
 ```bash
-python -m PyInstaller YouTube_Downloader.spec
+pyinstaller YouTube_Downloader.spec
 ```
 
-**Important:** Due to an unresolved issue with PyInstaller, the `datas` directive in the `.spec` file may not work correctly. After the build is complete, you must **manually copy** the contents of the `vendor` folder into the `dist` folder so they are next to the `YouTube_Downloader.exe`.
+This will create a `dist` folder containing the final `YouTube_Downloader.exe` and all its necessary dependencies.
 
 ## License
 
